@@ -1,4 +1,4 @@
-# Configuring Unity Editor with smart merge:
+# Configuring Unity Editor with Smart Merge:
 ## 1. Set Asset Serialization to Force Text
 Open your Unity project.
 
