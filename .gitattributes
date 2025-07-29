@@ -1,0 +1,43 @@
+# --- Unity Text Assets ---
+
+*.anim        merge=unityyamlmerge eol=lf
+*.asset       merge=unityyamlmerge eol=lf
+*.controller  merge=unityyamlmerge eol=lf
+*.mat         merge=unityyamlmerge eol=lf
+*.meta        merge=unityyamlmerge eol=lf
+*.prefab      merge=unityyamlmerge eol=lf
+*.unity       merge=unityyamlmerge eol=lf
+*.physicMaterial2D merge=unityyamlmerge eol=lf
+*.mask        merge=unityyamlmerge eol=lf
+*.brush       merge=unityyamlmerge eol=lf
+
+# --- Text Files ---
+
+*.cs          text eol=lf
+*.shader      text eol=lf
+*.cginc       text eol=lf
+*.compute     text eol=lf
+*.txt         text eol=lf
+*.json        text eol=lf
+*.xml         text eol=lf
+*.yaml        text eol=lf
+
+# --- Images and Binary ---
+
+*.png         binary
+*.jpg         binary
+*.jpeg        binary
+*.psd         binary
+*.tga         binary
+*.fbx         binary
+*.mp3         binary
+*.ogg         binary
+*.wav         binary
+*.dll         binary
+*.exe         binary
+*.pdf         binary
+*.zip         binary
+*.unitypackage binary
+
+# for .sh enjoyers
+*.sh text eol=lf

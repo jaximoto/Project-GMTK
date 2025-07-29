@@ -1,0 +1,4 @@
+[merge "unityyamlmerge"]
+    name = Unity Smart Merge
+    driver = smartmerge.bat
+    
