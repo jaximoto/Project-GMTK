@@ -10,7 +10,7 @@ Under Asset Serialization, set Mode to:
 This ensures Unity saves .prefab, .unity, .asset, etc. files in a text-based YAML format, which is mergeable.
 
 ## 2. Set Version Control Mode to Visible Meta Files
-In the same Editor settings window, under Version Control, set Mode to:
+Now go to the version control tab in the Project settings to set Mode to:
 `Visible Meta Files`
 
 This makes sure Unity creates .meta files for assets, which are also text and can be merged.
@@ -37,7 +37,12 @@ Open Terminal at project root and run:
 chmod +x ./smartmerge
 ```
 ---
-## 6. Test your setup
+
+## 3. Change your .gitconfig
+Change your .gitconfig so that `device` points to `smartmerge.sh`, not `smartmerge.bat`
+
+
+## 4. Test your setup
 Create a branch and modify a `.prefab` or `.unity file`.
 
 On another branch, modify the same file differently.
