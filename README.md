@@ -37,7 +37,12 @@ Open Terminal at project root and run:
 chmod +x ./smartmerge
 ```
 ---
-## 6. Test your setup
+
+## 3. Change your .gitconfig
+Change your .gitconfig so that `device` points to `smartmerge.sh`, not `smartmerge.bat`
+
+
+## 4. Test your setup
 Create a branch and modify a `.prefab` or `.unity file`.
 
 On another branch, modify the same file differently.
