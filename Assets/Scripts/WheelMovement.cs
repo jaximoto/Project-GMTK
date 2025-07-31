@@ -8,33 +8,34 @@ public class WheelMovement : MonoBehaviour
     [SerializeField] public float linDecelerationRate = 100.0f;
     [SerializeField] public float rotBrakeAmplifier = 50.0f;
     [SerializeField] public float linBrakeAmplifier = 50.0f;
+    [SerializeField] public float speedDashInc = 10.0f;
+
     private Rigidbody2D rb;
     private bool applyInput;
+    private float speedDashBuildUp;
+    private bool speedDashing;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        speedDashBuildUp = 0.0f;
+        speedDashing = false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-       HandleMovement(); 
+        HandleMovement(); 
     }
 
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            applyInput = true;
-            Brake();
-        }
-
-        if (!applyInput)
+        /* Remove force */
+        if (!applyInput && !speedDashing)
         {
             rb.AddTorque(-rb.angularVelocity * rotDecelerationRate * Time.deltaTime);
             rb.AddForce(-rb.linearVelocity * linDecelerationRate * Time.deltaTime);
@@ -42,10 +43,20 @@ public class WheelMovement : MonoBehaviour
     }
 
 
-    void SpeedDash()
+    void SpeedDashBuildUp(float s)
     {
-        rb.AddTorque(-rb.angularVelocity * rotDecelerationRate * Time.deltaTime * rotBrakeAmplifier);
-        rb.AddForce(-rb.linearVelocity * linDecelerationRate * Time.deltaTime * linBrakeAmplifier);
+        speedDashing = true;
+        speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
+        transform.Rotate(0f, 0f, speedDashInc * torqueAmount * Time.deltaTime);
+        rb.linearVelocity = Vector2.zero;
+    }
+
+
+    void UnleashSpeedDash()
+    {
+        speedDashing = false;
+        rb.AddTorque(speedDashBuildUp, ForceMode2D.Force);
+        speedDashBuildUp = 0f;
     }
 
 
@@ -59,6 +70,29 @@ public class WheelMovement : MonoBehaviour
     void HandleMovement()
     {
         applyInput = false;
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            applyInput = true;
+
+            Brake();
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                SpeedDashBuildUp(-1.0f);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                SpeedDashBuildUp(1.0f);
+            }
+
+        }
+        else if (speedDashing)
+        {
+            Debug.Log(speedDashBuildUp);
+            UnleashSpeedDash();
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddTorque(torqueAmount * Time.deltaTime);
@@ -69,6 +103,7 @@ public class WheelMovement : MonoBehaviour
             rb.AddTorque(-torqueAmount * Time.deltaTime);
             applyInput = true;
         }
+
     }
 
 }
