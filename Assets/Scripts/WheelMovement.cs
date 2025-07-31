@@ -17,9 +17,14 @@ public class WheelMovement : MonoBehaviour
     private Vector2 properAxis;
 
     public Transform core;
-    public float gravity, groundedGravity;
+    
+    public float gravity, groundedGravity, termVel;
+    private float fallSpeed;
     bool grounded;
 
+    //Relativityitiytiytyi
+    public Vector2 up, right;
+    public Transform axisSprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,9 +38,10 @@ public class WheelMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAxis();
+        
+        //UpdateAxis();
         HandleMovement(); 
-        ApplyGravity();
+        
     }
 
 
@@ -46,6 +52,8 @@ public class WheelMovement : MonoBehaviour
         {
             rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotDecelerationRate);
         }
+        // do grounds check
+        ApplyGravity();
     }
 
 
@@ -126,27 +134,39 @@ public class WheelMovement : MonoBehaviour
     }
 
 
-    /* Gravity */
-    public Vector2 AimDownComponent()
+
+    //Decoupling in case we use a different map than a circle
+    public Vector2 GetNormal() 
     {
-        return -(transform.position - core.position).normalized;    
+        Vector2 normal = (transform.position - core.position).normalized;
+        Debug.DrawRay(transform.position, normal, Color.green);
+        return normal; 
     }
 
-
+    /* Gravity */
     void ApplyGravity()
     {
-        CheckGround();
+        Vector2 fallVel;
+        Vector2 down = -GetNormal();
+        CheckGround(down);
+        Debug.Log($"grounded = {grounded}");
+        if (grounded){
+            fallSpeed = Mathf.MoveTowards(fallSpeed, groundedGravity, gravity * Time.deltaTime);
+            fallVel = fallSpeed * down;
 
-        float useGravity = grounded ? groundedGravity : gravity;
-        Vector2 Grav = AimDownComponent() * useGravity;
-        Debug.DrawRay(transform.position, Grav, Color.red);
-        rb.AddForce(Grav*Time.deltaTime);           
+        }
+        else{
+            fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * Time.deltaTime);
+            fallVel = fallSpeed * down; 
+        }
+        rb.linearVelocity += fallVel;
     }
 
 
-    void CheckGround()
+    void CheckGround(Vector2 down)
     {
-        Debug.DrawRay(transform.position, properAxis * (transform.localScale.x / 2), Color.blue);
-        grounded = Physics2D.Raycast(transform.position, properAxis, transform.localScale.x / 2);
+        Physics2D.queriesStartInColliders = false;
+        Debug.DrawRay(transform.position, down * (transform.localScale.x * 1.15f), Color.blue);
+        grounded = Physics2D.Raycast(transform.position, down, transform.localScale.x * 1.15f);
     }
 }

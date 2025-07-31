@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     void RotateCamera()
     {
-        transform.up = -player.GetComponent<WheelMovement>().AimDownComponent();
+        transform.up = player.GetComponent<WheelMovement>().GetNormal();
     }
     
     void CenterCamera()
