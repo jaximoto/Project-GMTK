@@ -4,8 +4,10 @@ public class WheelMovement : MonoBehaviour
 {
 
     [SerializeField] public float torqueAmount = 10f;
-    [SerializeField] public float decelerationRate = 1.0f;
-    [SerializeField] public float breakAmplifier = 2.0f;
+    [SerializeField] public float rotDecelerationRate = 2.0f;
+    [SerializeField] public float linDecelerationRate = 100.0f;
+    [SerializeField] public float rotBrakeAmplifier = 50.0f;
+    [SerializeField] public float linBrakeAmplifier = 50.0f;
     private Rigidbody2D rb;
     private bool applyInput;
 
@@ -29,22 +31,29 @@ public class WheelMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             applyInput = true;
-            Break();
-            Debug.Log("Breaking");
+            Brake();
         }
 
         if (!applyInput)
         {
-            rb.AddTorque(-rb.angularVelocity * decelerationRate * Time.deltaTime);
+            rb.AddTorque(-rb.angularVelocity * rotDecelerationRate * Time.deltaTime);
+            rb.AddForce(-rb.linearVelocity * linDecelerationRate * Time.deltaTime);
         }
     }
 
 
-    void Break()
+    void SpeedDash()
     {
-        //rb.angularVelocity = Mathf.MoveTowards(rb.angularVelocity, 0f, breakAmplifier * Time.deltaTime);
-        rb.angularVelocity = 0f;
-        rb.linearVelocity = Vector2.zero;
+        rb.AddTorque(-rb.angularVelocity * rotDecelerationRate * Time.deltaTime * rotBrakeAmplifier);
+        rb.AddForce(-rb.linearVelocity * linDecelerationRate * Time.deltaTime * linBrakeAmplifier);
+    }
+
+
+    void Brake()
+    {
+        //rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, Time.deltaTime * brakeAmplifier);
+        rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotBrakeAmplifier);
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * linBrakeAmplifier);
     }
 
 
