@@ -162,7 +162,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6c96a6d6eb03f2e4e8e59ff0f6a511ab, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 88933930}
-  gravity: 98
-  groundedGravity: 98
+  gravity: 200
+  groundedGravity: 200
 --- !u!50 &968938811
 Rigidbody2D:
   serializedVersion: 5
