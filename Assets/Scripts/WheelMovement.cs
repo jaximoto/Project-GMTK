@@ -37,8 +37,7 @@ public class WheelMovement : MonoBehaviour
         /* Remove force */
         if (!applyInput && !speedDashing)
         {
-            rb.AddTorque(-rb.angularVelocity * rotDecelerationRate * Time.deltaTime);
-            rb.AddForce(-rb.linearVelocity * linDecelerationRate * Time.deltaTime);
+            rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotDecelerationRate);
         }
     }
 
@@ -55,7 +54,8 @@ public class WheelMovement : MonoBehaviour
     void UnleashSpeedDash()
     {
         speedDashing = false;
-        rb.AddTorque(speedDashBuildUp, ForceMode2D.Force);
+        rb.AddTorque(speedDashBuildUp*1000, ForceMode2D.Impulse);
+        //rb.angularVelocity += speedDashBuildUp;
         speedDashBuildUp = 0f;
     }
 
@@ -79,11 +79,11 @@ public class WheelMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.A))
             {
-                SpeedDashBuildUp(-1.0f);
+                SpeedDashBuildUp(1.0f);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                SpeedDashBuildUp(1.0f);
+                SpeedDashBuildUp(-1.0f);
             }
 
         }

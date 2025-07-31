@@ -255,6 +255,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2127998508072487562, guid: 9fd8a7b8012b64d69a36c6e7b90ca137, type: 3}
+      propertyPath: rotDecelerationRate
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6210333756947224961, guid: 9fd8a7b8012b64d69a36c6e7b90ca137, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -304,6 +308,10 @@ PrefabInstance:
       value: 1.0538689
       objectReference: {fileID: 0}
     - target: {fileID: 7885023950930825824, guid: 9fd8a7b8012b64d69a36c6e7b90ca137, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6c96a6d6eb03f2e4e8e59ff0f6a511ab, type: 2}
+    - target: {fileID: 7885023950930825824, guid: 9fd8a7b8012b64d69a36c6e7b90ca137, type: 3}
       propertyPath: m_Offset.x
       value: 0.022154689
       objectReference: {fileID: 0}
@@ -333,8 +341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 88933930}
-  gravity: 250
-  groundedGravity: 250
+  gravity: 1000
+  groundedGravity: 1000
 --- !u!1 &1933403270
 GameObject:
   m_ObjectHideFlags: 0
