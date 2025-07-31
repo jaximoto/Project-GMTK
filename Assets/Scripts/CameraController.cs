@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         RotateCamera();
-        //CenterCamera();
+        CenterCamera();
     }
 
     void RotateCamera()
@@ -25,11 +25,9 @@ public class CameraController : MonoBehaviour
         transform.up = -player.GetComponent<Gravity>().AimDownComponent();
     }
     
-    /*void CenterCamera()
+    void CenterCamera()
     {
-        Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, target, camAccell * Time.deltaTime);
-        
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
     }
-    */
+    
 }
