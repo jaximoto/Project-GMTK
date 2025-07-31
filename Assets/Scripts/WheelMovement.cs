@@ -14,6 +14,11 @@ public class WheelMovement : MonoBehaviour
     private bool applyInput;
     private float speedDashBuildUp;
     private bool speedDashing;
+    private Vector2 properAxis;
+
+    public Transform core;
+    public float gravity, groundedGravity;
+    bool grounded;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,7 +33,9 @@ public class WheelMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateAxis();
         HandleMovement(); 
+        ApplyGravity();
     }
 
 
@@ -39,6 +46,12 @@ public class WheelMovement : MonoBehaviour
         {
             rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotDecelerationRate);
         }
+    }
+
+
+    void UpdateAxis()
+    {
+        properAxis = core.position - transform.position;
     }
 
 
@@ -55,7 +68,6 @@ public class WheelMovement : MonoBehaviour
     {
         speedDashing = false;
         rb.AddTorque(speedDashBuildUp*1000, ForceMode2D.Impulse);
-        //rb.angularVelocity += speedDashBuildUp;
         speedDashBuildUp = 0f;
     }
 
@@ -71,6 +83,12 @@ public class WheelMovement : MonoBehaviour
     {
         applyInput = false;
 
+        if (!grounded)
+        {
+            return;
+        }
+
+        /* Breaking and speed dashing */
         if (Input.GetKey(KeyCode.S))
         {
             applyInput = true;
@@ -93,6 +111,7 @@ public class WheelMovement : MonoBehaviour
             UnleashSpeedDash();
         }
 
+        /* Standard movement */
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddTorque(torqueAmount * Time.deltaTime);
@@ -106,4 +125,28 @@ public class WheelMovement : MonoBehaviour
 
     }
 
+
+    /* Gravity */
+    public Vector2 AimDownComponent()
+    {
+        return -(transform.position - core.position).normalized;    
+    }
+
+
+    void ApplyGravity()
+    {
+        CheckGround();
+
+        float useGravity = grounded ? groundedGravity : gravity;
+        Vector2 Grav = AimDownComponent() * useGravity;
+        Debug.DrawRay(transform.position, Grav, Color.red);
+        rb.AddForce(Grav*Time.deltaTime);           
+    }
+
+
+    void CheckGround()
+    {
+        Debug.DrawRay(transform.position, properAxis * (transform.localScale.x / 2), Color.blue);
+        grounded = Physics2D.Raycast(transform.position, properAxis, transform.localScale.x / 2);
+    }
 }
