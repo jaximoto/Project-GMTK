@@ -1,11 +1,15 @@
 using UnityEngine;
+[RequireComponent(typeof(WheelMovement))]
 
 public class VisualPlayer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    WheelMovement _playerMovement;
+    Transform _centerOfPlanet;
+   
+    void Awake()
     {
-        
+        _playerMovement = GetComponent<WheelMovement>();
+        _centerOfPlanet = _playerMovement.cent
     }
 
     // Update is called once per frame
