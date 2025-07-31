@@ -1,10 +1,11 @@
 using UnityEngine;
 
+
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-
-
+    public float camAccell;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,9 +24,10 @@ public class CameraController : MonoBehaviour
     {
         transform.up = -player.GetComponent<WheelMovement>().AimDownComponent();
     }
+    
     void CenterCamera()
     {
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
     }
-
+    
 }
