@@ -1,20 +1,19 @@
 using UnityEngine;
-[RequireComponent(typeof(WheelMovement))]
 
 public class VisualPlayer : MonoBehaviour
 {
-    WheelMovement _playerMovement;
-    Transform _centerOfPlanet;
+    public WheelMovement _playerMovement;
+    
    
     void Awake()
     {
-        _playerMovement = GetComponent<WheelMovement>();
-        _centerOfPlanet = _playerMovement.cent
+        _playerMovement = FindFirstObjectByType<WheelMovement>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.up = _playerMovement.GetNormal();
     }
 }
