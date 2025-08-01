@@ -9,6 +9,7 @@ public class WheelMovement : MonoBehaviour
     [SerializeField] public float rotBrakeAmplifier = 50.0f;
     [SerializeField] public float linBrakeAmplifier = 50.0f;
     [SerializeField] public float speedDashInc = 10.0f;
+    [SerializeField] public float groondPoondAccel = 5.0f;
 
     private Rigidbody2D rb;
     private bool applyInput;
@@ -17,7 +18,7 @@ public class WheelMovement : MonoBehaviour
     private Vector2 properAxis;
 
     public int speedDashUnleashed;
-    [SerializeField] public int speedDashLag = 100;
+    [SerializeField] public int speedDashLag = 1000;
 
     public Transform core;
     
@@ -30,6 +31,7 @@ public class WheelMovement : MonoBehaviour
     //Relativityitiytiytyi
     public Vector2 up, right;
     public Transform axisSprite;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,6 +46,7 @@ public class WheelMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        applyInput = false;
         UpdateState();
         if (!acceptingInput)
         {
@@ -59,10 +62,8 @@ public class WheelMovement : MonoBehaviour
     void FixedUpdate()
     {
         /* Remove force */
-        if (!applyInput || !speedDashing)
-        {
-            rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotDecelerationRate);
-        }
+        rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * 1);
+
         // do grounds check
         ApplyGravity();
     }
@@ -116,13 +117,29 @@ public class WheelMovement : MonoBehaviour
     }
 
 
+    void GroondPoond()
+    {
+        Vector2 down = -GetNormal();
+        fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * groondPoondAccel * Time.deltaTime);
+        Vector2 fallVel = fallSpeed * down; 
+        rb.linearVelocity += fallVel;
+    }
+
+
     void HandleMovement()
     {
-        applyInput = false;
 
         if (!grounded)
         {
-            return;
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                GroondPoond();
+            }
+            else
+            {
+                return;
+            }
         }
 
         /* Breaking and speed dashing */
@@ -187,7 +204,6 @@ public class WheelMovement : MonoBehaviour
         {
             fallSpeed = Mathf.MoveTowards(fallSpeed, groundedGravity, gravity * Time.deltaTime);
             fallVel = fallSpeed * down;
-
         }
         else
         {
