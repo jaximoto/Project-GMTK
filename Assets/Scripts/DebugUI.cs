@@ -35,8 +35,6 @@ public class DebugUI : MonoBehaviour
     {
         linVelTxt.text = $"Velocity: {linVel}";
         rpmsTxt.text = $"Angular Velocity: {angVel}";
-        
-
 
     }
 
