@@ -21,7 +21,8 @@ public class WheelMovement : MonoBehaviour
     public float gravity, groundedGravity, termVel;
     private float fallSpeed;
     bool grounded;
-
+    
+    
     //Relativityitiytiytyi
     public Vector2 up, right;
     public Transform axisSprite;
@@ -159,14 +160,17 @@ public class WheelMovement : MonoBehaviour
             fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * Time.deltaTime);
             fallVel = fallSpeed * down; 
         }
+        Debug.DrawRay(transform.position, fallVel, Color.yellow);
         rb.linearVelocity += fallVel;
     }
 
 
     void CheckGround(Vector2 down)
     {
+        
         Physics2D.queriesStartInColliders = false;
         Debug.DrawRay(transform.position, down * (transform.localScale.x * 1.15f), Color.blue);
         grounded = Physics2D.Raycast(transform.position, down, transform.localScale.x * 1.15f);
+        Physics2D.queriesStartInColliders = true;
     }
 }
