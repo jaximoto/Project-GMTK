@@ -2,15 +2,29 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Score _score;
+    public  int CoinValue = 10;
+    private void Awake()
     {
-        
+        _score = FindFirstObjectByType<Score>();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            CollectedCoin();
+        }
+            
+        else
+        {
+            Debug.Log(collision.tag);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CollectedCoin()
     {
-        
+        _score._score += CoinValue;
+        _score._ringCount++;
+        Destroy(gameObject);
     }
 }
