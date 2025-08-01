@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 26e26964a0daad34e9a7227870c96a88
+guid: a70ac68ef0bc0c144bdfb84a6719a424
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1656246283368683259
-    second: exhaust_0
-  - first:
-      213: 328269582359103275
-    second: exhaust_1
-  - first:
-      213: 4287256942014047947
-    second: exhaust_2
+      213: -7530177133356341135
+    second: exhaust1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,14 +46,14 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: exhaust_0
+      name: exhaust1_0
       rect:
         serializedVersion: 2
-        x: 416
-        y: 561
-        width: 431
-        height: 399
+        x: 551
+        y: 660
+        width: 296
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,52 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 509af3bc7c4d309e0800000000000000
-      internalID: -1656246283368683259
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: exhaust_1
-      rect:
-        serializedVersion: 2
-        x: 837
-        y: 613
-        width: 17
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b278417227f3e8400800000000000000
-      internalID: 328269582359103275
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: exhaust_2
-      rect:
-        serializedVersion: 2
-        x: 792
-        y: 559
-        width: 23
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc6239159756f7b30800000000000000
-      internalID: 4287256942014047947
+      spriteID: 178a6863bcf6f7790800000000000000
+      internalID: -7530177133356341135
       vertices: []
       indices: 
       edges: []
@@ -201,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      exhaust_0: -1656246283368683259
-      exhaust_1: 328269582359103275
-      exhaust_2: 4287256942014047947
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
