@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+    WheelMovement wm;
+    Rigidbody2D rb;
     public float camAccell;
-    
+    Vector2 anticipation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        wm = FindFirstObjectByType<WheelMovement>();
+        rb = wm.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,12 +24,17 @@ public class CameraController : MonoBehaviour
 
     void RotateCamera()
     {
-        transform.up = player.GetComponent<WheelMovement>().GetNormal();
+        transform.up = wm.GetNormal();
     }
     
     void CenterCamera()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y, transform.position.z);
     }
-    
+
+    void AnticipateMovement()
+    {
+        anticipation = rb.linearVelocity;
+        Debug.DrawRay(rb.transform.position, anticipation, Color.red);
+    }
 }

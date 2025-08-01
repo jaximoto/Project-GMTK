@@ -29,7 +29,7 @@ public class DebugUI : MonoBehaviour
     public void SetStats()
     {
         linVel = Mathf.Abs(rb.linearVelocity.magnitude);
-        angVel = rb.angularVelocity;
+        angVel = Mathf.Abs(rb.angularVelocity);
     }
     void DrawUI()
     {
