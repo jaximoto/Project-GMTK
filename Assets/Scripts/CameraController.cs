@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     WheelMovement wm;
     Rigidbody2D rb;
-    public float camAccell, rotAccell, minOffset,maxOffset;
+    public float followAccell, camAccell, rotAccell, minOffset, maxOffset;
     bool anticipating;
     Vector2 anticipation;
 
@@ -48,16 +48,29 @@ public class CameraController : MonoBehaviour
             //followSpeed = camAccell;        
         }
         tar.z = -10;
-        FollowTarget(tar, rb.linearVelocity.magnitude);
+        FollowTarget(tar);
     }
 
     //new Camera follower functions
     //maybe remove follow speed/ replace with lin velocity
-    void FollowTarget(Vector3 tar, float followSpeed)
+    void FollowTarget(Vector3 tar)
     {
         Debug.Log($"tar is {tar}, anticipating? {anticipating}");
+        float followSpeed;
+        //check follow proximity
+        float diff = (transform.position - tar).magnitude;
+        if (diff < 1)
+        {
+            followSpeed = camAccell;
+        }
+        else
+        {
+            followSpeed = rb.linearVelocity.magnitude;
+        }
+    
         transform.position = Vector3.Lerp(transform.position, tar, followSpeed * Time.deltaTime);
     }
+
 
     void AnticipateMovement()
     {
