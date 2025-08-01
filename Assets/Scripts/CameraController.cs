@@ -5,7 +5,8 @@ public class CameraController : MonoBehaviour
 {
     WheelMovement wm;
     Rigidbody2D rb;
-    public float camAccell;
+    public float camAccell, rotAccell, minOffset,maxOffset;
+    bool anticipating;
     Vector2 anticipation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,26 +16,53 @@ public class CameraController : MonoBehaviour
         rb = wm.GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        AnticipateMovement();
         RotateCamera();
         CenterCamera();
     }
 
     void RotateCamera()
     {
-        transform.up = wm.GetNormal();
+        Debug.Log($"Transform.up is {transform.up}");
+        //transform.up = wm.GetNormal();
+        transform.up = Vector2.MoveTowards(transform.up, wm.GetNormal(), rotAccell * Time.deltaTime);
     }
     
     void CenterCamera()
     {
-        transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y, transform.position.z);
+        Vector3 tar;
+        //float followSpeed;
+        if(Mathf.Abs(anticipation.magnitude) >= minOffset)
+        {
+            anticipating = true;
+            Vector2 offset = anticipation.normalized * Mathf.Min(anticipation.magnitude, maxOffset);
+            tar = rb.position + offset;
+            //followSpeed = camAccell;   
+        }
+        else 
+        { 
+            anticipating = false;
+            tar = rb.position;
+            //followSpeed = camAccell;        
+        }
+        tar.z = -10;
+        FollowTarget(tar, rb.linearVelocity.magnitude);
+    }
+
+    //new Camera follower functions
+    //maybe remove follow speed/ replace with lin velocity
+    void FollowTarget(Vector3 tar, float followSpeed)
+    {
+        Debug.Log($"tar is {tar}, anticipating? {anticipating}");
+        transform.position = Vector3.Lerp(transform.position, tar, followSpeed * Time.deltaTime);
     }
 
     void AnticipateMovement()
     {
         anticipation = rb.linearVelocity;
         Debug.DrawRay(rb.transform.position, anticipation, Color.red);
+        
     }
 }
