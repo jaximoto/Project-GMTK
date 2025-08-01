@@ -22,7 +22,7 @@ public class VisualPlayer : MonoBehaviour
         
         if (_playerRigidbody.angularVelocity > 0)
         {
-            Debug.Log("In if");
+            //Debug.Log("In if");
             /*
             _tmp = Vector2.Perpendicular(_playerMovement.GetNormal());
             transform.right = new Vector2(-_tmp.x, _tmp.y);
