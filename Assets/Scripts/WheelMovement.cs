@@ -9,6 +9,7 @@ public class WheelMovement : MonoBehaviour
     [SerializeField] public float rotBrakeAmplifier = 50.0f;
     [SerializeField] public float linBrakeAmplifier = 50.0f;
     [SerializeField] public float speedDashInc = 10.0f;
+    [SerializeField] public float groondPoondAccel = 5.0f;
 
     private Rigidbody2D rb;
     private bool applyInput;
@@ -16,16 +17,21 @@ public class WheelMovement : MonoBehaviour
     private bool speedDashing;
     private Vector2 properAxis;
 
+    public int speedDashUnleashed;
+    [SerializeField] public int speedDashLag = 1000;
+
     public Transform core;
     
     public float gravity, groundedGravity, termVel;
     private float fallSpeed;
     bool grounded;
+    bool acceptingInput;
     
     
     //Relativityitiytiytyi
     public Vector2 up, right;
     public Transform axisSprite;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,28 +39,49 @@ public class WheelMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         speedDashBuildUp = 0.0f;
         speedDashing = false;
+        acceptingInput = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
-        //UpdateAxis();
-        HandleMovement(); 
-        
+        applyInput = false;
+        UpdateState();
+        if (!acceptingInput)
+        {
+            Debug.Log($"Accepting Input = {acceptingInput}");
+        }
+        if (acceptingInput)
+        {
+            HandleMovement(); 
+        }
     }
 
 
     void FixedUpdate()
     {
         /* Remove force */
-        if (!applyInput && !speedDashing)
-        {
-            rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * rotDecelerationRate);
-        }
+        rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * 1);
+
         // do grounds check
         ApplyGravity();
+    }
+
+
+    void UpdateState()
+    {
+        acceptingInput = !speedDashing;
+
+        if (speedDashing)
+        {
+            speedDashUnleashed++;
+        }
+
+        if (speedDashUnleashed > speedDashLag)
+        {
+            speedDashing = false;
+        }
     }
 
 
@@ -66,18 +93,20 @@ public class WheelMovement : MonoBehaviour
 
     void SpeedDashBuildUp(float s)
     {
-        speedDashing = true;
         speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
-        transform.Rotate(0f, 0f, speedDashInc * torqueAmount * Time.deltaTime);
+        transform.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
         rb.linearVelocity = Vector2.zero;
     }
 
 
     void UnleashSpeedDash()
     {
-        speedDashing = false;
+        speedDashing = true;
+        rb.angularVelocity = 0f;
+        rb.linearVelocity = Vector2.zero;
         rb.AddTorque(speedDashBuildUp*1000, ForceMode2D.Impulse);
         speedDashBuildUp = 0f;
+        speedDashUnleashed = 0;
     }
 
 
@@ -88,13 +117,29 @@ public class WheelMovement : MonoBehaviour
     }
 
 
+    void GroondPoond()
+    {
+        Vector2 down = -GetNormal();
+        fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * groondPoondAccel * Time.deltaTime);
+        Vector2 fallVel = fallSpeed * down; 
+        rb.linearVelocity += fallVel;
+    }
+
+
     void HandleMovement()
     {
-        applyInput = false;
 
         if (!grounded)
         {
-            return;
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                GroondPoond();
+            }
+            else
+            {
+                return;
+            }
         }
 
         /* Breaking and speed dashing */
@@ -114,10 +159,15 @@ public class WheelMovement : MonoBehaviour
             }
 
         }
-        else if (speedDashing)
+        else if (Input.GetKeyUp(KeyCode.S))
         {
-            Debug.Log(speedDashBuildUp);
             UnleashSpeedDash();
+            return;
+        }
+
+        if (speedDashing)
+        {
+            return;
         }
 
         /* Standard movement */
@@ -135,7 +185,6 @@ public class WheelMovement : MonoBehaviour
     }
 
 
-
     //Decoupling in case we use a different map than a circle
     public Vector2 GetNormal() 
     {
@@ -144,19 +193,20 @@ public class WheelMovement : MonoBehaviour
         return normal; 
     }
 
+
     /* Gravity */
     void ApplyGravity()
     {
         Vector2 fallVel;
         Vector2 down = -GetNormal();
         CheckGround(down);
-        Debug.Log($"grounded = {grounded}");
-        if (grounded){
+        if (grounded)
+        {
             fallSpeed = Mathf.MoveTowards(fallSpeed, groundedGravity, gravity * Time.deltaTime);
             fallVel = fallSpeed * down;
-
         }
-        else{
+        else
+        {
             fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * Time.deltaTime);
             fallVel = fallSpeed * down; 
         }
