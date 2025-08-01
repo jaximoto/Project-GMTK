@@ -67,7 +67,7 @@ public class WheelMovement : MonoBehaviour
     {
         speedDashing = true;
         speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
-        transform.Rotate(0f, 0f, speedDashInc * torqueAmount * Time.deltaTime);
+        transform.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
         rb.linearVelocity = Vector2.zero;
     }
 
@@ -115,7 +115,6 @@ public class WheelMovement : MonoBehaviour
         }
         else if (speedDashing)
         {
-            Debug.Log(speedDashBuildUp);
             UnleashSpeedDash();
         }
 
@@ -150,12 +149,14 @@ public class WheelMovement : MonoBehaviour
         Vector2 down = -GetNormal();
         CheckGround(down);
         Debug.Log($"grounded = {grounded}");
-        if (grounded){
+        if (grounded)
+        {
             fallSpeed = Mathf.MoveTowards(fallSpeed, groundedGravity, gravity * Time.deltaTime);
             fallVel = fallSpeed * down;
 
         }
-        else{
+        else
+        {
             fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * Time.deltaTime);
             fallVel = fallSpeed * down; 
         }
