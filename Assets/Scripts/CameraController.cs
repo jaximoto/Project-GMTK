@@ -26,7 +26,6 @@ public class CameraController : MonoBehaviour
 
     void RotateCamera()
     {
-        Debug.Log($"Transform.up is {transform.up}");
         //transform.up = wm.GetNormal();
         transform.up = Vector2.MoveTowards(transform.up, wm.GetNormal(), rotAccell * Time.deltaTime);
     }
