@@ -3,10 +3,10 @@ using System;
 public enum SoundType
 {
     LAND,
-    COLLIDE,
     HURT,
-    JUMP,
+    SPRING,
     ROLL,
+    RING,
     BRAKE,
     GROUNDPOUND,
     TITLE,

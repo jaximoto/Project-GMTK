@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Spring : MonoBehaviour
@@ -5,6 +6,7 @@ public class Spring : MonoBehaviour
     public float springStrength = 10f;
     Animator SpringController;
     int _springHash;
+    Vector2 _wheelNormal;
     private void Awake()
     {
         SpringController = GetComponent<Animator>();
@@ -15,11 +17,15 @@ public class Spring : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("collided");
-            if( collision.TryGetComponent<Rigidbody2D>(out Rigidbody2D _rigidbody2D))
+            if( collision.TryGetComponent<WheelMovement>(out WheelMovement wheel))
             {
-                Debug.Log("Got a rigidbody");
+                //Debug.Log("Got a rigidbody");
                 SpringController.Play(_springHash);
-                _rigidbody2D.AddForceY(springStrength);
+
+                _wheelNormal = wheel.GetNormal();
+                Rigidbody2D rb = wheel.GetComponent<Rigidbody2D>(); 
+                //if (rb.)
+                wheel.GetComponent<Rigidbody2D>().AddForce(_wheelNormal * springStrength, ForceMode2D.Impulse);
             }
             
             
