@@ -397,7 +397,9 @@ MonoBehaviour:
   rpmsTxt: {fileID: 5735828450491062288}
   loopsTxt: {fileID: 3920878195133150828}
   timeTxt: {fileID: 4839989786264901441}
-  ringletsTxt: {fileID: 2988056698196901107}
+  ringletsCountTxt: {fileID: 4839989786264901441}
+  totalScoreTxt: {fileID: 3920878195133150828}
+  _score: {fileID: 4791483130925508043}
 --- !u!1 &1565426912432932512
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +547,7 @@ GameObject:
   - component: {fileID: 8204068503348293262}
   - component: {fileID: 150798900531411829}
   - component: {fileID: 3920878195133150828}
+  - component: {fileID: 4791483130925508043}
   m_Layer: 5
   m_Name: Victory Loops
   m_TagString: Untagged
@@ -670,6 +673,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4791483130925508043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544509284673186777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5804ff4506d3b49b0caf2ce8c9ead3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 0
+  _ringCount: 0
 --- !u!1 &4970247113739787428
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +789,7 @@ GameObject:
   - component: {fileID: 344841862185080379}
   - component: {fileID: 5385511575640662252}
   - component: {fileID: 4839989786264901441}
+  - component: {fileID: 6131099492350001524}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -897,6 +915,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6131099492350001524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179400779266473962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e6e693c3e774c47b4e5572e9173227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 4839989786264901441}
+  totalSeconds: 300
 --- !u!1 &8946078609200499578
 GameObject:
   m_ObjectHideFlags: 0
