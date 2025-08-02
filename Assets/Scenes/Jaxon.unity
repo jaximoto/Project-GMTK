@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotAccell: 1
   minOffset: 2
-  maxOffset: 15
+  maxOffset: 8
 --- !u!1 &984057855
 GameObject:
   m_ObjectHideFlags: 0
