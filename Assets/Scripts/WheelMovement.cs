@@ -188,12 +188,20 @@ public class WheelMovement : MonoBehaviour
     //Decoupling in case we use a different map than a circle
     public Vector2 GetNormal() 
     {
-        Vector2 normal = (transform.position - core.position).normalized;
+        Vector2 normal = GetDistance().normalized;
         Debug.DrawRay(transform.position, normal, Color.green);
         return normal; 
     }
 
+    public Vector2 GetDistance()
+    {
+        return transform.position - core.position;
+    }
 
+    float ScaleGravity()
+    {
+        return Mathf.Abs(GetDistance().magnitude);
+    }
     /* Gravity */
     void ApplyGravity()
     {
@@ -211,6 +219,7 @@ public class WheelMovement : MonoBehaviour
             fallVel = fallSpeed * down; 
         }
         Debug.DrawRay(transform.position, fallVel, Color.yellow);
+        //Scale based off distance
         rb.linearVelocity += fallVel;
     }
 

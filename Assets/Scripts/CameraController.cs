@@ -49,6 +49,7 @@ public class CameraController : MonoBehaviour
         float diff = (transform.position - tar).magnitude;
         float followSpeed = Mathf.Sqrt(diff)*2;
         transform.position = Vector3.Lerp(transform.position, tar, followSpeed * Time.deltaTime);
+        Physics2D.SyncTransforms();
     }
 
 
