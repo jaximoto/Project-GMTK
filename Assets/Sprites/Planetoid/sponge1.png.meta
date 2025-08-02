@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 28ac5385a48df3e4cbcd5d26874a31cc
+guid: 40ddce8c911e07945953f6e4188b392a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8058544755856205819
-    second: texture test_0
+      213: 4248784617426643641
+    second: sponge1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,9 +50,9 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  spritePivot: {x: 0.6068226, y: 0.5041585}
   spritePixelsToUnits: 256
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 931, y: 306, z: 510, w: 282}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: texture test_0
+      name: sponge1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 148
-        height: 151
+        x: 926
+        y: 305
+        width: 486
+        height: 492
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf7656b62c3b5df60800000000000000
-      internalID: 8058544755856205819
+      spriteID: 9baebd83917b6fa30800000000000000
+      internalID: 4248784617426643641
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      texture test_0: 8058544755856205819
+      sponge1_0: 4248784617426643641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
