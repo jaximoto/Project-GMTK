@@ -4,49 +4,72 @@ public class LoopDeLoops : MonoBehaviour
 {
     public Collider2D frontColl, backColl;
 
-    public bool frontOpen, backOpen;
-
+    bool frontOpen, backOpen, looping;
+    bool dir;
 
     void FrontLoop()
     {
         Debug.Log("opening");
-        backOpen = true;
-        backColl.isTrigger = true;
-        frontOpen = false;
-        frontColl.isTrigger = false;
+        if (dir)
+        {
+            backColl.isTrigger = true;
+            frontColl.isTrigger = false;
+        }
+        else
+        {
+            backColl.isTrigger = false;
+            looping = false;
+        }
     }
-    void MiddleLoop()
+
+    //we want this to switch based off direction
+    void MiddleLoop(bool dir)
     {
-        backOpen = false;
-        backColl.isTrigger = false;
-        frontOpen = true;
-        frontColl.isTrigger = true;
+        backColl.isTrigger = !dir;
+        frontColl.isTrigger = dir;
     }
     void BackLoop()
     {
-        backOpen = true;
-        backColl.isTrigger = true;
-        frontOpen = false;
-        frontColl.isTrigger = false;
+        if (dir)
+        {
+            frontColl.isTrigger = false;
+            looping = false;
+        }
+        else
+        {
+            backColl.isTrigger = false;
+            frontColl.isTrigger = true;
+        }
     }
 
     public void GetTrigger(int i)
     {
-        checkTrigger(i); 
+        CheckTrigger(i); 
     }
 
-    void checkTrigger(int i)
+    //check direction of loop
+    void SetLoopState(int i)
+    {
+        if (!looping)
+        {
+            if (i == 0) dir = true;
+            else if (i == 2) dir = false;
+        }
+    }
+    void CheckTrigger(int i)
     {
         Debug.Log($"i is {i}");
         switch(i)
         {
             case 0:
-                if(!backOpen) FrontLoop(); 
+                if (!looping) SetLoopState(i); 
+                FrontLoop(); 
                 break;
             case 1:
-                if(!frontOpen)MiddleLoop();
+                MiddleLoop(dir);
                 break;
             case 2:
+                if(!looping) SetLoopState(i);
                 BackLoop();
                 break;
         }
