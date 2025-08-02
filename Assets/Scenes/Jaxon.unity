@@ -2033,7 +2033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ff2ba3d0082084fbfc31ef86ed1af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springStrength: 10
+  springStrength: 1000
 --- !u!1 &634522236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2244,7 @@ MonoBehaviour:
   rotAccell: 1
   minOffset: 2
   maxOffset: 8
+  tracking: {fileID: 0}
 --- !u!1 &984057855
 GameObject:
   m_ObjectHideFlags: 0
