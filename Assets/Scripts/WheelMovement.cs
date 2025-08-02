@@ -107,7 +107,7 @@ public class WheelMovement : MonoBehaviour
     void SpeedDashBuildUp(float s)
     {
         speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
-        transform.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
+        axisSprite.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
         rb.linearVelocity = Vector2.zero;
     }
 
