@@ -274,6 +274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   torque: 100
   force: 100
-  gravity: 0
-  termVel: 0
+  gravity: 100
+  termVel: 1000
   core: {fileID: 0}
