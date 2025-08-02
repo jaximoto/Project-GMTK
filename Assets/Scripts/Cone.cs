@@ -6,6 +6,12 @@ public class Cone : MonoBehaviour
     [SerializeField] public float torque = 100f;
     [SerializeField] public float force = 100f;
 
+    [SerializeField] public float gravity;
+    [SerializeField] public float termVel;
+    private float fallSpeed;
+
+    public Transform core;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +37,10 @@ public class Cone : MonoBehaviour
     void FlyAway()
     {
         // Apply upward force
-        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        Vector2 up = GetNormal();
+        Debug.Log(up);
+        Debug.DrawRay(transform.position, up, Color.blue);
+        rb.AddForce(up * force, ForceMode2D.Impulse);
 
         // Apply random torque
         float randomTorque = Random.Range(-1f, 1f) * torque;
@@ -39,5 +48,31 @@ public class Cone : MonoBehaviour
         rb.AddTorque(randomTorque, ForceMode2D.Impulse);
         
     }
+
+
+    public Vector2 GetNormal() 
+    {
+        Vector2 normal = GetDistance().normalized;
+        Debug.DrawRay(transform.position, normal, Color.green);
+        return normal; 
+    }
+
+
+    public Vector2 GetDistance()
+    {
+        return transform.position - core.position;
+    }
+
+
+    //void ApplyGravity()
+    //{
+    //    Vector2 fallVel;
+    //    Vector2 down = -GetNormal();
+    //    fallSpeed = Mathf.MoveTowards(fallSpeed, termVel, gravity * Time.deltaTime);
+    //    fallVel = fallSpeed * down; 
+    //    //Scale based off distance
+    //    rb.linearVelocity += fallVel;
+
+    //}
 
 }
