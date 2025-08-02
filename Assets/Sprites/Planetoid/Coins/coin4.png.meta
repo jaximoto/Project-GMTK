@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 28ac5385a48df3e4cbcd5d26874a31cc
+guid: c8838d14eff80e740b3903e2d92492f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8058544755856205819
-    second: texture test_0
+      213: 5993543728748791393
+    second: coin3_0
+  - first:
+      213: -74848142270253872
+    second: coin3_1
+  - first:
+      213: -6389383906778646548
+    second: coin3_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,20 +46,20 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: texture test_0
+      name: coin3_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 148
-        height: 151
+        x: 290
+        y: 87
+        width: 431
+        height: 793
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf7656b62c3b5df60800000000000000
-      internalID: 8058544755856205819
+      spriteID: 16687d124485d2350800000000000000
+      internalID: 5993543728748791393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin3_1
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 53
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d432ebd20616fef0800000000000000
+      internalID: -74848142270253872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin3_2
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 41
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce77cde60395457a0800000000000000
+      internalID: -6389383906778646548
       vertices: []
       indices: 
       edges: []
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      texture test_0: 8058544755856205819
+      coin3_0: 5993543728748791393
+      coin3_1: -74848142270253872
+      coin3_2: -6389383906778646548
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -3,9 +3,10 @@ using TMPro;
 public class DebugUI : MonoBehaviour
 {
     public Transform relAxis;
-    public TMP_Text linVelTxt, rpmsTxt, loopsTxt, timeTxt, ringletsTxt;
+    public TMP_Text linVelTxt, rpmsTxt, loopsTxt, timeTxt, ringletsCountTxt, totalScoreTxt;
+    public Score _score;
 
-    int loops, ringlets;
+    int loops, ringlets, totalScore;
     float linVel, angVel;
 
     WheelMovement wm;
@@ -26,16 +27,20 @@ public class DebugUI : MonoBehaviour
         RotateCompass();
     }
 
+    
     public void SetStats()
     {
         linVel = Mathf.Abs(rb.linearVelocity.magnitude);
         angVel = Mathf.Abs(rb.angularVelocity);
+        ringlets = _score._ringCount;
+        totalScore = _score._score;
     }
     void DrawUI()
     {
         linVelTxt.text = $"Velocity: {linVel}";
         rpmsTxt.text = $"Angular Velocity: {angVel}";
-
+        ringletsCountTxt.text = $"Ringlets Count: {ringlets}";
+        totalScoreTxt.text = $"Total Score: {totalScore}";
     }
 
     void RotateCompass()

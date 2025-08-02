@@ -202,6 +202,7 @@ public class WheelMovement : MonoBehaviour
     {
         return Mathf.Abs(GetDistance().magnitude);
     }
+
     /* Gravity */
     void ApplyGravity()
     {
