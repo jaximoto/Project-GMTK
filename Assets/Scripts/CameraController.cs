@@ -5,14 +5,17 @@ public class CameraController : MonoBehaviour
 {
     WheelMovement wm;
     Rigidbody2D rb;
+    Transform t;
     public float rotAccell, minOffset, maxOffset;
     Vector2 anticipation, targetAnticipation;
+    public GameObject tracking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         wm = FindFirstObjectByType<WheelMovement>();
         rb = wm.GetComponent<Rigidbody2D>();
+        t = rb.GetComponent<Transform>();
         transform.position = rb.position;
         transform.up = wm.GetNormal();
     }
@@ -24,9 +27,9 @@ public class CameraController : MonoBehaviour
         CenterCamera();
     }
 
+
     void RotateCamera()
     {
-        Debug.Log($"Transform.up is {transform.up}");
         //transform.up = wm.GetNormal();
         transform.up = Vector2.MoveTowards(transform.up, wm.GetNormal(), rotAccell * Time.deltaTime);
     }
@@ -39,25 +42,31 @@ public class CameraController : MonoBehaviour
             Vector2 offset = anticipation.normalized * Mathf.Min(anticipation.magnitude, maxOffset);
             tar = rb.position + offset;
         }
-        else tar = rb.position;      
+        else tar = rb.position;
+        tracking.transform.position = tar;
         tar.z = -10;
+        
         FollowTarget(tar);
     }
 
     void FollowTarget(Vector3 tar)
     {
         float diff = (transform.position - tar).magnitude;
-        float followSpeed = Mathf.Sqrt(diff)*2;
+        float followSpeed = Mathf.Sqrt(diff)*20;
         transform.position = Vector3.Lerp(transform.position, tar, followSpeed * Time.deltaTime);
-        Physics2D.SyncTransforms();
     }
 
-
+    Vector2 lastPos;
     void AnticipateMovement()
-    {
+    {   
+        Vector2 pos = t.position;
+        Vector2 tVel = (pos - lastPos) / Time.deltaTime;
+        Debug.Log($"rb.linearVelocity is {rb.linearVelocity} and transVel is {tVel}");
+
         targetAnticipation = rb.linearVelocity;
-        anticipation = Vector2.Lerp(anticipation, targetAnticipation, Time.deltaTime);       
+        Vector2 newAnticipation = (targetAnticipation + tVel) / 2;  
+        anticipation = Vector2.Lerp(anticipation, newAnticipation, Time.deltaTime);       
         Debug.DrawRay(rb.transform.position, anticipation, Color.red);
-        
+        lastPos = pos;
     }
 }
