@@ -11,7 +11,7 @@ public class CloseLoop : MonoBehaviour
     {
         if (col.gameObject.tag == "player")
         {
-            ldl.CloseLoop();
+            //ldl.CloseLoop();
         }
     }
 }

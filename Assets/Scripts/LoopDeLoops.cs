@@ -2,33 +2,55 @@ using UnityEngine;
 
 public class LoopDeLoops : MonoBehaviour
 {
-    public Collider2D frontColl, backCollider;
+    public Collider2D frontColl, backColl;
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "player")
-        {
-            OpenLoop();
-        }
-    }
+    public bool frontOpen, backOpen;
 
 
-    void OpenLoop()
+    void FrontLoop()
     {
-        backCollider.isTrigger = false;
-        frontColl.isTrigger = true;
-        Debug.Log("Open");
-    }
-    public void CloseLoop()
-    {
+        Debug.Log("opening");
+        backOpen = true;
+        backColl.isTrigger = true;
+        frontOpen = false;
         frontColl.isTrigger = false;
-        backCollider.isTrigger = true;
-        Debug.Log("Close");
+    }
+    void MiddleLoop()
+    {
+        backOpen = false;
+        backColl.isTrigger = false;
+        frontOpen = true;
+        frontColl.isTrigger = true;
+    }
+    void BackLoop()
+    {
+        backOpen = true;
+        backColl.isTrigger = true;
+        frontOpen = false;
+        frontColl.isTrigger = false;
     }
 
-    //if its possible to not close the loop, then we'll have to check and close it ourselves
-    void checkOpen()
+    public void GetTrigger(int i)
     {
+        checkTrigger(i); 
+    }
+
+    void checkTrigger(int i)
+    {
+        Debug.Log($"i is {i}");
+        switch(i)
+        {
+            case 0:
+                if(!backOpen) FrontLoop(); 
+                break;
+            case 1:
+                if(!frontOpen)MiddleLoop();
+                break;
+            case 2:
+                BackLoop();
+                break;
+        }
+
 
     }
 }
