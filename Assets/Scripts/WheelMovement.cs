@@ -25,7 +25,7 @@ public class WheelMovement : MonoBehaviour
     
     public float gravity, groundedGravity, termVel;
     private float fallSpeed;
-    bool grounded;
+    public bool grounded;
     bool acceptingInput;
     
     
