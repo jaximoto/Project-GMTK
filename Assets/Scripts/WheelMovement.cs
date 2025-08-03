@@ -103,9 +103,15 @@ public class WheelMovement : MonoBehaviour
         properAxis = core.position - transform.position;
     }
 
-
+    public GameObject fire1, fire2;
     void SpeedDashBuildUp(float s)
     {
+        if(!fire1.activeSelf || fire2.activeSelf)
+        {
+            fire1.SetActive(true);
+            fire2.SetActive(true);
+        }
+           
         speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
         axisSprite.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
         rb.linearVelocity = Vector2.zero;
@@ -120,6 +126,8 @@ public class WheelMovement : MonoBehaviour
         rb.AddTorque(speedDashBuildUp*1000, ForceMode2D.Impulse);
         speedDashBuildUp = 0f;
         speedDashUnleashed = 0;
+        fire1.SetActive(false);
+        fire2.SetActive(false);
     }
 
 
