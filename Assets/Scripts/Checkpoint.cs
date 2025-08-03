@@ -50,7 +50,7 @@ public class Checkpoint : MonoBehaviour
             if (finishLine)
             {
                 IncAngularVelocityCap();
-                AddScore();
+                AddLoop();
                 Debug.Log(score._score);
             }
         }
@@ -63,8 +63,9 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-    void AddScore()
+    void AddLoop()
     {
-        score._score += 1;
+        score._loopCount += 1;
+        score._score += 1000;
     }
 }
