@@ -106,6 +106,7 @@ public class WheelMovement : MonoBehaviour
     public GameObject fire1, fire2;
     void SpeedDashBuildUp(float s)
     {
+        SoundManager.PlayRandomSoundPitch(SoundType.REVV);
         if(!fire1.activeSelf || fire2.activeSelf)
         {
             fire1.SetActive(true);
@@ -120,6 +121,7 @@ public class WheelMovement : MonoBehaviour
 
     void UnleashSpeedDash()
     {
+        SoundManager.KillSFX();
         speedDashing = true;
         rb.angularVelocity = 0f;
         rb.linearVelocity = Vector2.zero;
