@@ -3,7 +3,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] public WheelMovement wheel;
-    [SerializeField] public int incAmt;
+    [SerializeField] public float incAmt;
     [SerializeField] public Checkpoint otherCheckpoint;
 
     [SerializeField] public bool active;
@@ -49,7 +49,7 @@ public class Checkpoint : MonoBehaviour
             /* If finish line checkpoint, increment player torque and add 1 to score */
             if (finishLine)
             {
-                IncTorque();
+                IncAngularVelocityCap();
                 AddScore();
                 Debug.Log(score._score);
             }
@@ -57,9 +57,9 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-    void IncTorque()
+    void IncAngularVelocityCap()
     {
-        wheel.torqueAmount += incAmt;
+        wheel.angularVelocityCap += wheel.angularVelocityCap;
     }
 
 

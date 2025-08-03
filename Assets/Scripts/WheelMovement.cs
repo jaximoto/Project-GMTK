@@ -10,6 +10,7 @@ public class WheelMovement : MonoBehaviour
     [SerializeField] public float linBrakeAmplifier = 50.0f;
     [SerializeField] public float speedDashInc = 10.0f;
     [SerializeField] public float groondPoondAccel = 5.0f;
+    [SerializeField] public float angularVelocityCap = 1000f;
 
     private Rigidbody2D rb;
     private bool applyInput;
@@ -66,6 +67,18 @@ public class WheelMovement : MonoBehaviour
 
         // do grounds check
         ApplyGravity();
+
+        CapAngularVelocity();
+    }
+
+
+    void CapAngularVelocity()
+    {
+        if (Mathf.Abs(rb.angularVelocity) >= angularVelocityCap && !speedDashing)
+        {
+            //fuck you
+            rb.angularVelocity = ( rb.angularVelocity < 0 ? -1 : 1 ) * angularVelocityCap;
+        }
     }
 
 
@@ -94,7 +107,7 @@ public class WheelMovement : MonoBehaviour
     void SpeedDashBuildUp(float s)
     {
         speedDashBuildUp += (s * speedDashInc * Time.deltaTime);
-        transform.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
+        axisSprite.Rotate(0f, 0f, s * speedDashInc * torqueAmount * Time.deltaTime);
         rb.linearVelocity = Vector2.zero;
     }
 
@@ -193,10 +206,12 @@ public class WheelMovement : MonoBehaviour
         return normal; 
     }
 
+
     public Vector2 GetDistance()
     {
         return transform.position - core.position;
     }
+
 
     float ScaleGravity()
     {
