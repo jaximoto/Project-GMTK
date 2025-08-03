@@ -49,6 +49,8 @@ public class Checkpoint : MonoBehaviour
             /* If finish line checkpoint, increment player torque and add 1 to score */
             if (finishLine)
             {
+                // SFX here
+                SoundManager.PlayEFXWithSoundPitch(SoundType.FINISH,.8f, true, score._loopCount * 1.5f);
                 IncAngularVelocityCap();
                 AddLoop();
                 Debug.Log(score._score);
