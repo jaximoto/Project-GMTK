@@ -3,10 +3,11 @@ using System;
 public enum SoundType
 {
     LAND,
-    HURT,
+    LAUNCH,
     SPRING,
     ROLL,
     RING,
+    REVV,
     BRAKE,
     GROUNDPOUND,
     TITLE,
@@ -81,6 +82,12 @@ public class SoundManager : MonoBehaviour
         instance.SFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         instance.SFXSource.PlayOneShot(randomClip, volume);
         instance.SFXSource.pitch = originalPitch;
+    }
+
+    public static void KillSFX()
+    {
+
+        instance.SFXSource.Stop();
     }
 
 
