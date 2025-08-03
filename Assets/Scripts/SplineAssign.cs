@@ -44,4 +44,29 @@ public class SplineAssign : MonoBehaviour
 
         ec = gameObject.AddComponent(typeof(EdgeCollider2D)) as EdgeCollider2D;
     }
+
+    
+    [ContextMenu("FlipTangents")]
+    void FlipTangents()
+    {
+        SpriteShapeController _sc = GetComponent<SpriteShapeController>();
+        for(int i = 0; i < _sc.spline.GetPointCount(); i++)
+        {
+            Vector3 rTan = _sc.spline.GetLeftTangent(i);
+            Vector3 lTan = _sc.spline.GetRightTangent(i);
+            _sc.spline.SetRightTangent(i, rTan);
+            _sc.spline.SetLeftTangent(i, lTan);
+        }
+    }
+    
+    [ContextMenu("FlipHeights")]
+    void FlipHeights()
+    {
+        SpriteShapeController _sc = GetComponent<SpriteShapeController>();
+        for (int i = 0; i < _sc.spline.GetPointCount(); i++)
+        {
+            _sc.spline.SetHeight(i, -_sc.spline.GetHeight(i));
+        }
+    } 
+
 }
