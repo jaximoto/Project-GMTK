@@ -415,6 +415,10 @@ PrefabInstance:
       propertyPath: StartingTrack
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
+      propertyPath: 'soundList.Array.data[8].sounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0fb02a0816d03e142ab647373e946b45, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

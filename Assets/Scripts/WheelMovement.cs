@@ -114,7 +114,7 @@ public class WheelMovement : MonoBehaviour
     public GameObject fire1, fire2;
     void SpeedDashBuildUp(float s)
     {
-        SoundManager.PlayRandomSoundPitch(SoundType.REVV);
+        SoundManager.PlayRandomSoundPitch(SoundType.REVV, 1, true);
         if(!fire1.activeSelf || fire2.activeSelf)
         {
             fire1.SetActive(true);
