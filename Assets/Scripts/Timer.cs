@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
 
         string prefix = seconds < 10 ? "0" : "";
 
-        timerText.text = $"{minutes}:{prefix}{seconds}";
+        timerText.text = $"Time: {minutes}:{prefix}{seconds}";
 
         if (totalSeconds < 1)
         {
