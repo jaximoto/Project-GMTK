@@ -25,6 +25,7 @@ public class Coin : MonoBehaviour
     {
         _score._score += CoinValue;
         _score._ringCount++;
+        SoundManager.PlayEFXRandomSoundPitch(SoundType.RING, .7f, true, .3f, .7f);
         Destroy(gameObject);
     }
 }

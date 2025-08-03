@@ -3,13 +3,15 @@ using System;
 public enum SoundType
 {
     LAND,
-    HURT,
+    LAUNCH,
     SPRING,
     ROLL,
     RING,
+    REVV,
     BRAKE,
     GROUNDPOUND,
     TITLE,
+    CONE,
     Level1
 
 }
@@ -23,7 +25,7 @@ public class SoundManager : MonoBehaviour
 
     private static SoundManager instance;
     private AudioSource[] AudioSources;
-    private AudioSource SFXSource, BGMSource;
+    private AudioSource SFXSource, BGMSource, EFXSource;
 
     private void Awake()
     {
@@ -35,10 +37,11 @@ public class SoundManager : MonoBehaviour
         if (Application.isPlaying)
         {
             AudioSources = GetComponents<AudioSource>();
-            if (AudioSources.Length == 2)
+            if (AudioSources.Length == 3)
             {
                 SFXSource = AudioSources[0];
                 BGMSource = AudioSources[1];
+                EFXSource = AudioSources[2];
             }
 
             else
@@ -81,6 +84,26 @@ public class SoundManager : MonoBehaviour
         instance.SFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         instance.SFXSource.PlayOneShot(randomClip, volume);
         instance.SFXSource.pitch = originalPitch;
+    }
+
+    // For environment sounds so it doesn't interupt player sounds
+    public static void PlayEFXRandomSoundPitch(SoundType sound, float volume = 1.0f, bool interupting = false, float minPitch = 0.9f, float maxPitch = 1.3f)
+    {
+
+        if (instance.SFXSource.isPlaying && !interupting) return;
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+
+        float originalPitch = instance.SFXSource.pitch;
+        instance.SFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        instance.SFXSource.PlayOneShot(randomClip, volume);
+        instance.SFXSource.pitch = originalPitch;
+    }
+
+    public static void KillSFX()
+    {
+
+        instance.SFXSource.Stop();
     }
 
 
