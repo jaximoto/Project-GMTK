@@ -12,7 +12,8 @@ public enum SoundType
     GROUNDPOUND,
     TITLE,
     CONE,
-    Level1
+    Level1,
+    FINISH,
 
 }
 
@@ -85,9 +86,7 @@ public class SoundManager : MonoBehaviour
         instance.SFXSource.PlayOneShot(randomClip, volume);
         instance.SFXSource.pitch = originalPitch;
     }
-
-    // For environment sounds so it doesn't interupt player sounds
-    public static void PlayEFXRandomSoundPitch(SoundType sound, float volume = 1.0f, bool interupting = false, float minPitch = 0.9f, float maxPitch = 1.3f)
+    public static void PlayWithSoundPitch(SoundType sound, float volume = 1.0f, bool interupting = false, float pitch = 1f)
     {
 
         if (instance.SFXSource.isPlaying && !interupting) return;
@@ -95,11 +94,38 @@ public class SoundManager : MonoBehaviour
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
 
         float originalPitch = instance.SFXSource.pitch;
-        instance.SFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        instance.SFXSource.pitch = pitch;
         instance.SFXSource.PlayOneShot(randomClip, volume);
         instance.SFXSource.pitch = originalPitch;
     }
 
+    // For environment sounds so it doesn't interupt player sounds
+    public static void PlayEFXRandomSoundPitch(SoundType sound, float volume = 1.0f, bool interupting = false, float minPitch = 0.9f, float maxPitch = 1.3f)
+    {
+
+        if (instance.EFXSource.isPlaying && !interupting) return;
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+
+        float originalPitch = instance.EFXSource.pitch;
+        instance.EFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        instance.EFXSource.PlayOneShot(randomClip, volume);
+        instance.EFXSource.pitch = originalPitch;
+    }
+
+    public static void PlayEFXWithSoundPitch(SoundType sound, float volume = 1.0f, bool interupting = false, float pitch = 1f)
+    {
+
+        if (instance.EFXSource.isPlaying && !interupting) return;
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+
+        float originalPitch = instance.EFXSource.pitch;
+        //instance.SFXSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        instance.EFXSource.pitch = pitch;
+        instance.SFXSource.PlayOneShot(randomClip, volume);
+        instance.SFXSource.pitch = originalPitch;
+    }
     public static void KillSFX()
     {
 
