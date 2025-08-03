@@ -19,6 +19,7 @@ public class Spring : MonoBehaviour
             Debug.Log("collided");
             if( collision.TryGetComponent<WheelMovement>(out WheelMovement wheel))
             {
+                SoundManager.PlayEFXRandomSoundPitch(SoundType.SPRING);
                 //Debug.Log("Got a rigidbody");
                 SpringController.Play(_springHash);
 
