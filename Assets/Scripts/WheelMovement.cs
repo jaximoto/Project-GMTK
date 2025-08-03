@@ -157,10 +157,7 @@ public class WheelMovement : MonoBehaviour
             {
                 GroondPoond();
             }
-            else
-            {
-                return;
-            }
+            return;
         }
 
         /* Breaking and speed dashing */
