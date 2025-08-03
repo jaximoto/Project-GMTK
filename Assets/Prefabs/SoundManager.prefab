@@ -151,7 +151,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 43d723cccffdd154798d1adc598105d9, type: 3}
   - name: LAUNCH
     sounds:
-    - {fileID: 8300000, guid: 229f1f1f2daf4bd40aea7b3d59f18736, type: 3}
+    - {fileID: 8300000, guid: 7e51104a5653dfc44a6a09ec7f6e3cf2, type: 3}
   - name: SPRING
     sounds:
     - {fileID: 8300000, guid: 09a74806b0ebb7d4eb6bf0192775f804, type: 3}

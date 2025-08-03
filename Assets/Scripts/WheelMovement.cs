@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 
@@ -112,9 +113,15 @@ public class WheelMovement : MonoBehaviour
     }
 
     public GameObject fire1, fire2;
+    bool playingSound = false;
     void SpeedDashBuildUp(float s)
     {
-        SoundManager.PlayRandomSoundPitch(SoundType.REVV, 1, true);
+        if (!playingSound)
+        {
+            playingSound = true;
+            SoundManager.PlayRandomSoundPitch(SoundType.REVV, .5f, true);
+        }
+        
         if(!fire1.activeSelf || fire2.activeSelf)
         {
             fire1.SetActive(true);
@@ -131,7 +138,8 @@ public class WheelMovement : MonoBehaviour
     {
         //Debug.Log("Called Unleashed Dash");
         SoundManager.KillSFX();
-        SoundManager.PlayWithSoundPitch(SoundType.LAUNCH, .8f, true, 4f);
+        playingSound = false;
+        SoundManager.PlayWithSoundPitch(SoundType.LAUNCH, .55f, true, 1f);
         speedDashing = true;
         rb.angularVelocity = 0f;
         rb.linearVelocity = Vector2.zero;
@@ -171,7 +179,7 @@ public class WheelMovement : MonoBehaviour
             }
             return;
         }
-
+        
         /* Breaking and speed dashing */
         if (Input.GetKey(KeyCode.S))
         {
@@ -200,18 +208,19 @@ public class WheelMovement : MonoBehaviour
             return;
         }
 
+
         /* Standard movement */
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddTorque(torqueAmount * Time.deltaTime);
             applyInput = true;
-            SoundManager.PlayRandomSoundPitch(SoundType.ROLL, .75f);
+            SoundManager.PlayRandomSoundPitch(SoundType.ROLL, .55f);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rb.AddTorque(-torqueAmount * Time.deltaTime);
             applyInput = true;
-            SoundManager.PlayRandomSoundPitch(SoundType.ROLL, .75f);
+            SoundManager.PlayRandomSoundPitch(SoundType.ROLL, .55f);
         }
 
     }
