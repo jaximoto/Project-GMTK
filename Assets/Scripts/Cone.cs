@@ -36,6 +36,7 @@ public class Cone : MonoBehaviour
 
     void FlyAway()
     {
+        SoundManager.PlayEFXRandomSoundPitch(SoundType.CONE);
         // Apply upward force
         Vector2 up = GetNormal();
         Debug.Log(up);

@@ -11,6 +11,7 @@ public enum SoundType
     BRAKE,
     GROUNDPOUND,
     TITLE,
+    CONE,
     Level1
 
 }
