@@ -12,7 +12,7 @@ public class WheelMovement : MonoBehaviour
     [SerializeField] public float groondPoondAccel = 5.0f;
     [SerializeField] public float angularVelocityCap = 1000f;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private bool applyInput;
     private float speedDashBuildUp;
     private bool speedDashing;
