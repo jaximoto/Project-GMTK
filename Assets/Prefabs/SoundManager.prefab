@@ -151,13 +151,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 43d723cccffdd154798d1adc598105d9, type: 3}
   - name: LAUNCH
     sounds:
-    - {fileID: 8300000, guid: 09a74806b0ebb7d4eb6bf0192775f804, type: 3}
+    - {fileID: 8300000, guid: 229f1f1f2daf4bd40aea7b3d59f18736, type: 3}
   - name: SPRING
     sounds:
     - {fileID: 8300000, guid: 09a74806b0ebb7d4eb6bf0192775f804, type: 3}
   - name: ROLL
     sounds:
-    - {fileID: 8300000, guid: 57124fdcd18ea68439c1cc119636d715, type: 3}
+    - {fileID: 8300000, guid: b3e6bf3a4434a9647af0a40cc19ea086, type: 3}
   - name: RING
     sounds:
     - {fileID: 8300000, guid: 57124fdcd18ea68439c1cc119636d715, type: 3}
@@ -178,7 +178,10 @@ MonoBehaviour:
   - name: Level1
     sounds:
     - {fileID: 8300000, guid: 146a9fc880c7fd947b620590e260107e, type: 3}
-  StartingTrack: 1
+  - name: FINISH
+    sounds:
+    - {fileID: 8300000, guid: 967f956772ca4d049b6fac4e07e1b2ea, type: 3}
+  StartingTrack: 10
 --- !u!82 &403080829615159424
 AudioSource:
   m_ObjectHideFlags: 0

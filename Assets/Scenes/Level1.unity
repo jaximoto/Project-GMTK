@@ -34882,34 +34882,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: StartingTrack
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: soundList.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: soundList.Array.data[11].name
-      value: FINISH
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: soundList.Array.data[12].name
-      value: FINISH
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: soundList.Array.data[11].sounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: 'soundList.Array.data[1].sounds.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 229f1f1f2daf4bd40aea7b3d59f18736, type: 3}
-    - target: {fileID: 8712856884230149739, guid: 68fb2bb22e597b349bbba71cb918cb14, type: 3}
-      propertyPath: 'soundList.Array.data[11].sounds.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 967f956772ca4d049b6fac4e07e1b2ea, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

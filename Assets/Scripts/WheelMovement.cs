@@ -129,7 +129,7 @@ public class WheelMovement : MonoBehaviour
 
     void UnleashSpeedDash()
     {
-        Debug.Log("Called Unleashed Dash");
+        //Debug.Log("Called Unleashed Dash");
         SoundManager.KillSFX();
         SoundManager.PlayWithSoundPitch(SoundType.LAUNCH, .8f, true, 4f);
         speedDashing = true;
